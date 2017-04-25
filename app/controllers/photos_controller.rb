@@ -17,11 +17,7 @@ class PhotosController < ApplicationController
   def show
     # The params hash looks like this: {"the_id_number"=>"13"}
     id_number = params["the_id_number"]
-    p = Photo.find(id_number)
-    @the_caption = p.caption
-    @the_image_url = p.source
-    @created_at = p.created_at
-
+    @photo = Photo.find(id_number)
 
     render("/photos/show.html.erb")
   end
@@ -30,4 +26,21 @@ class PhotosController < ApplicationController
     @all_photos = Photo.all.order({:created_at => :desc})
     render("/photos/index.html.erb")
   end
+
+  def edit_form
+    @edited_photo = Photo.find(params[:the_id])
+    render("/photos/edit_form.html.erb")
+  end
+
+  def update_row
+    id_number = params["the_id"]
+    p = Photo.find(id_number)
+    p.source = params["the_source"]
+    p.caption = params["the_caption"]
+    p.save
+
+
+    redirect_to("/photos")
+  end
+
 end

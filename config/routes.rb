@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get("/photos/:the_id_number", { :controller => "photos", :action => "show" })
 
   # UPDATE
+  get("/photos/:the_id/edit", { :controller => "photos", :action => "edit_form" })
+  get("update_photo/:the_id/", { :controller => "photos", :action => "update_row" })
 
   # DELETE
 
