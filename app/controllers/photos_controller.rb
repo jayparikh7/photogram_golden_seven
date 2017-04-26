@@ -1,5 +1,9 @@
 class PhotosController < ApplicationController
 
+  def home
+    redirect_to("/photos")
+  end
+
   def new_form
     render("/photos/new.html.erb")
   end
@@ -39,8 +43,7 @@ class PhotosController < ApplicationController
     p.caption = params["the_caption"]
     p.save
 
-
-    redirect_to("/photos")
+    redirect_to("/photos/"+(p.id).to_s)
   end
 
   def destroy
